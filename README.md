@@ -1,1 +1,4 @@
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+- Card prop types
+- kyt vs create-react-app selection process
+- redux choice
+- 
