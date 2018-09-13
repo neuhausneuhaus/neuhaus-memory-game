@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
 import GameView from './components/Game';
+import styled from 'styled-components'
 import './App.css';
+
+const AppWrapper = styled.div `
+  background-color: orange;
+`
 
 class App extends Component {
 
   render() {
     return (
-      <GameView/>
+      <AppWrapper>
+        <GameView/>
+      </AppWrapper>
     );
   }
 }
