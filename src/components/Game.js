@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 /*import Timer from '../Timer/Timer'*/
 /*import Board from '../Board/Board'*/
 import Card from './Card'
-import { revealCard, checkMatchedPair, initGame } from '../actions';
+import { revealCard, checkMatchedPair, initGame, changeDifficulty } from '../actions';
 
 // import './Game.scss'
 
@@ -40,18 +40,29 @@ class Game extends Component {
     };
     return cardObjs;
   }
+  on
   statusArea() {
+    // TODO: Consider extracting to a component file
     var genStatus = this.props.gameCompleted ?
       "YOU DID IT!" :
       this.props.matchesMade + "Pairs Found";
     var restartBtnText = this.props.gameCompleted ?
       "Play Again?" :
       "Restart"
+    var diffucltyBtnText = this.props.difficulty === "easy" ?
+      "switch to hard" :
+      "switch to easy"
+
     return (
       <div className='game-status'>
         <div className='game-status_gen'>{genStatus}</div>
         <div className='game-status_turns'>{this.props.turnsTaken + " turns taken"}</div>
-        <div className='game-status_restart-btn'>{restartBtnText}</div>
+        <button className='game-status_restart-btn' onClick={this.props.onPlayAgain}>
+          {restartBtnText}
+        </button>
+        <button className='game-status_difficulty-btn' onClick={this.props.onChangeDifficulty}>
+          {diffucltyBtnText}
+        </button>
       </div>
     );
   }
@@ -74,7 +85,8 @@ const mapStateToProps = state => ({
   cards: state.cards,
   turnsTaken: state.turnsTaken,
   gameCompleted: state.gameCompleted,
-  matchesMade: state.matchesMade
+  matchesMade: state.matchesMade,
+  difficulty: state.difficulty
 })
 
 const mapDispatchToProps = (dispatch) => {
@@ -87,6 +99,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     onPlayAgain: () => {
       dispatch(initGame());
+    },
+    onChangeDifficulty: level => {
+      dispatch(changeDifficulty(level));
     }
   };
 };
