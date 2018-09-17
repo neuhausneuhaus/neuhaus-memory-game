@@ -26,6 +26,7 @@ class Game extends Component {
 
   getCards() {
     var onClick = this.props.onCardClicked;
+    
     var cards = this.props.cards;
     var cardObjs = [];
     for (var i = 0; i < cards.length; i++) {

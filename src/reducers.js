@@ -1,6 +1,6 @@
 import { REVEAL_CARD, CHECK_MATCHED_PAIR, markCardsMatched, 
          MARK_CARDS_MATCHED, hidePair, HIDE_PAIR, INIT_GAME, 
-         checkMatchedPair, revealCard, CHANGE_DIFFICULTY } from "./actions";
+         checkMatchedPair, revealCard, CHANGE_DIFFICULTY, GET_CRD_DATA_RECEIVED } from "./actions";
 
 
 var startingCards = {
@@ -136,7 +136,11 @@ function gameReduc(state = initialGameState, action){
         secondSelection: secondSelection, 
         selectionsInTurn : numClicks,
         cards: cardReduc(state.cards, action) } );
-    
+    case GET_CRD_DATA_RECEIVED:
+      return Object.assign({}, state, {
+        cardData: action.data
+      });
+      // return action.data
     default:
       return state;
   }

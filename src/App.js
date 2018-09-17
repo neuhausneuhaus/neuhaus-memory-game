@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import GameView from './components/Game';
 import styled from 'styled-components'
-import './App.css';
+// import './App.css';
 
 const AppWrapper = styled.div `
   text-align: center;

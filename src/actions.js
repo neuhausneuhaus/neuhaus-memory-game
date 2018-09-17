@@ -4,6 +4,10 @@ export const MARK_CARDS_MATCHED = 'MARK_CARDS_MATCHED';
 export const HIDE_PAIR = 'HIDE_PAIR';
 export const INIT_GAME = 'INIT_GAME';
 export const CHANGE_DIFFICULTY = 'CHANGE_DIFFICULTY';
+export const GET_CRD_DATA = 'GET_CRD_DATA';
+export const GET_CRD_DATA_RECEIVED = 'GET_CRD_DATA_RECEIVED';
+
+
 
 export function initGame() {
   return { type: INIT_GAME };
@@ -26,4 +30,11 @@ export function revealCard(id) {
 
 export function changeDifficulty(level) {
   return { type: CHANGE_DIFFICULTY, level }
+}
+
+export function getCardData() {
+  return {type: GET_CRD_DATA };
+}
+export function getCardDataReceived() {
+  return {type: GET_CRD_DATA_RECEIVED };
 }

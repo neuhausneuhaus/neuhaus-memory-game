@@ -1,5 +1,6 @@
 import React from 'react'
-import styled, { css } from 'styled-components'
+// import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import ReactCardFlip from 'react-card-flip';
 import cardHiddenImg from '../images/cardHidden.png'
 import cardPaperImg from '../images/cardPaper.jpeg'
