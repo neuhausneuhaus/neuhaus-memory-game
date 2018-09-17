@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import './App.css';
 
 const AppWrapper = styled.div `
-  background-color: orange;
+  text-align: center;
 `
 
 class App extends Component {

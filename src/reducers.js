@@ -16,7 +16,7 @@ var startingCards = {
     }
   ]
 }
-
+// TODO: FIX ME!!!!!
 var difficultySelected = "easy";
 
 var numberOfCards = difficultySelected==="easy" ? 8 : 16;

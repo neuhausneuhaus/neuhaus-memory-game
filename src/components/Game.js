@@ -40,7 +40,6 @@ class Game extends Component {
     };
     return cardObjs;
   }
-  on
   statusArea() {
     // TODO: Consider extracting to a component file
     var genStatus = this.props.gameCompleted ?
