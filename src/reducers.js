@@ -16,15 +16,8 @@ var startingCards = {
     }
   ]
 }
-// TODO: FIX ME!!!!!
-var difficultySelected = "easy";
-
-var numberOfCards = difficultySelected==="easy" ? 8 : 16;
 
 
-
-
-// const initialTurnState = {
 const initialGameState = {
   selectionsInTurn : 0,
   firstSelection : undefined,
@@ -74,7 +67,6 @@ function cardReduc(state=[], action) {
   }
 }
 
-// Returns object 
 function gameReduc(state = initialGameState, action){
   switch (action.type) {
     case INIT_GAME:
@@ -97,6 +89,7 @@ function gameReduc(state = initialGameState, action){
         // √ Match √
         let matchesMade = state.matchesMade + 1;
         let gameCompleted = false;
+        var numberOfCards = state.difficulty==="easy" ? 8 : 16;
         if (matchesMade >= numberOfCards/2) {
           gameCompleted = true;
         }
@@ -142,19 +135,13 @@ function gameReduc(state = initialGameState, action){
         firstSelection: firstSelection, 
         secondSelection: secondSelection, 
         selectionsInTurn : numClicks,
-        cards: cardReduc(state.cards, action) } );    
-    
-    // case SHUFFLE_CARDS:
-    //   return Object.assign({}, state, { cards: cardReduc(state.cards, action) } );
+        cards: cardReduc(state.cards, action) } );
     
     default:
       return state;
   }
 }
 
-
-
-/*TODO: Move these functions to more appropriate home?*/
 
 function generateNewCards(difficulty="easy") {
   var cardIcons = [];
@@ -186,7 +173,7 @@ function generateNewCards(difficulty="easy") {
 
 
 function getCard(id, cards) {
-  for(let i=0; i < numberOfCards; i++) {
+  for(let i=0; i < cards.length; i++) {
     if (cards[i].id === id) {
       return cards[i];
     }
