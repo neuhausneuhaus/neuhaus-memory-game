@@ -1,21 +1,7 @@
 import { REVEAL_CARD, CHECK_MATCHED_PAIR, markCardsMatched, 
-         MARK_CARDS_MATCHED, hidePair, HIDE_PAIR, INIT_GAME, 
+         MARK_CARDS_MATCHED, hidePair, HIDE_PAIR, INIT_GAME, initGame,
          checkMatchedPair, revealCard, CHANGE_DIFFICULTY, GET_CRD_DATA_RECEIVED } from "./actions";
 
-
-var startingCards = {
-  /*TODO: Fetch from https://web-code-test-dot-nyt-games-prd.appspot.com/cards.json instead of hardcoding!*/
-  "levels": [
-    {
-      "cards": [ "✈", "♘", "✈", "♫", "♫", "☆", "♘", "☆" ],
-      "difficulty": "easy"
-    },
-    {
-      "cards": [ "❄", "⍨", "♘", "✈", "☯", "♠", "☆", "❄", "♫", "♫", "☯", "☆", "✈", "⍨", "♠", "♘" ],
-      "difficulty": "hard"
-    }
-  ]
-}
 
 
 const initialGameState = {
@@ -27,7 +13,7 @@ const initialGameState = {
   matchesMade : 0,
   gameCompleted: false,
   difficulty: "easy",
-  cards: generateNewCards()
+  cards: []
 };
 
 function cardReduc(state=[], action) {
@@ -70,18 +56,26 @@ function cardReduc(state=[], action) {
 function gameReduc(state = initialGameState, action){
   switch (action.type) {
     case INIT_GAME:
-      return Object.assign({}, initialGameState, { cards: generateNewCards(state.difficulty) } );
+      return Object.assign({}, state, { 
+        turnsTaken : 0,
+        matchesMade : 0,
+        gameCompleted: false,
+        cards: generateNewCards(state.cardData, state.difficulty) 
+      } );
     
     case CHANGE_DIFFICULTY:
       // For now, this will both change difficulty, and initiate a new game regardless of progress in current game
       // TODO: consider adding alert warning in cases where game has progressed past a certain point.
-      var level = state.difficulty === "easy" ?
+      var newLevel = state.difficulty === "easy" ?
         "hard" :
         "easy" ;
 
-      return Object.assign({}, initialGameState, {
-        difficulty: level,
-        cards: generateNewCards(level)
+      return Object.assign({}, state, {
+        turnsTaken : 0,
+        matchesMade : 0,
+        gameCompleted: false,
+        difficulty: newLevel,
+        cards: generateNewCards(state.cardData, newLevel)
       });
 
     case CHECK_MATCHED_PAIR:
@@ -138,7 +132,9 @@ function gameReduc(state = initialGameState, action){
         cards: cardReduc(state.cards, action) } );
     case GET_CRD_DATA_RECEIVED:
       return Object.assign({}, state, {
-        cardData: action.data
+        cards: generateNewCards(action.data, state.difficulty),
+        cardData: action.data,
+        cardDataLoaded: true
       });
       // return action.data
     default:
@@ -147,14 +143,15 @@ function gameReduc(state = initialGameState, action){
 }
 
 
-function generateNewCards(difficulty="easy") {
+function generateNewCards(cardData, difficulty="easy") {
+
   var cardIcons = [];
   if (difficulty==="easy") {
-    cardIcons = startingCards.levels.find(obj => {
+    cardIcons = cardData.levels.find(obj => {
       return obj.difficulty === "easy"
     }).cards;
   } else {
-    cardIcons = startingCards.levels.find(obj => {
+    cardIcons = cardData.levels.find(obj => {
       return obj.difficulty === "hard"
     }).cards;
   }

@@ -6,6 +6,7 @@ export const INIT_GAME = 'INIT_GAME';
 export const CHANGE_DIFFICULTY = 'CHANGE_DIFFICULTY';
 export const GET_CRD_DATA = 'GET_CRD_DATA';
 export const GET_CRD_DATA_RECEIVED = 'GET_CRD_DATA_RECEIVED';
+export const GET_CRD_DATA_ERROR = 'GET_CRD_DATA_ERROR';
 
 
 
@@ -35,6 +36,9 @@ export function changeDifficulty(level) {
 export function getCardData() {
   return {type: GET_CRD_DATA };
 }
-export function getCardDataReceived() {
-  return {type: GET_CRD_DATA_RECEIVED };
+export function getCardDataReceived(data) {
+  return {type: GET_CRD_DATA_RECEIVED, data };
+}
+export function getCardDataError(data) {
+  return {type: GET_CRD_DATA_ERROR };
 }

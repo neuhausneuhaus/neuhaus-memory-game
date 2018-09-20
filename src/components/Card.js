@@ -1,53 +1,37 @@
-import React from 'react'
-// import styled, { css } from 'styled-components'
-import styled from 'styled-components'
+import React from 'react';
+import styled from 'styled-components';
 import ReactCardFlip from 'react-card-flip';
-import cardHiddenImg from '../images/cardHidden.png'
-import cardPaperImg from '../images/cardPaper.jpeg'
-  const CardContainer = styled.div `
-    text-align: center;
-    width: 300px;
-    height: 300px;
-    float: left; 
-  `
+import cardHiddenImg from '../assets/images/cardHidden.png';
+import cardPaperImg from '../assets/images/cardPaper.jpeg';
 
-   // `${props => props.revealed ?
-   //   css`
-   //     background-color: red; 
-   //     border: 1px solid orange;`:
-   //   css`
-   //     background-image: url(${cardHiddenImg});
-   //     background-color: yellow;
-   //     border: 1px solid teal;`
-   // };
-   // ${props => props.matched && css`
-   //     background-color: green; 
-   //     border: 1px solid darkGreen;`
-   // };`
 
-  // TODO:replace all 300px heights & widths with viewsize based var
-  // Note: CardRevealedContents dimensions, margin & lineheight would need to be recalculated too
+const CardContainer = styled.div `
+  text-align: center;
+  height: ${props => props.size === "large" ? "300px" : "200px"};
+  width: ${props => props.size === "large" ? "300px" : "200px"};
+  max-width: 30%;
+`
 const CardHidden = styled.div `
   background-image: url(${cardHiddenImg});
   background-repeat: no-repeat;
   background-size: contain;
-  height: 300px;
-  width: 300px;
+  height: ${props => props.size === "large" ? "300px" : "200px"};
+  width: ${props => props.size === "large" ? "300px" : "200px"};
 `
 
 const CardRevealed = styled.div `
-  width: 300px;
-  height: 300px;
+  height: ${props => props.size === "large" ? "300px" : "200px"};
+  width: ${props => props.size === "large" ? "300px" : "200px"};
 `
 
 const CardRevealedContents = styled.div `
   background-image: url(${cardPaperImg});
   background-repeat: no-repeat;
   background-size: cover;
-  height: 265px;
-  width: 192px;
-  line-height: 235px;
-  font-size: 80px;
+  height: ${props => props.size === "large" ? "265px" : "176px"};
+  width: ${props => props.size === "large" ? "192px" : "128px"};
+  line-height: ${props => props.size === "large" ? "235px" : "156px"};
+  font-size: ${props => props.size === "large" ? "80px" : "53px"};
   border: 1px solid black;
   margin: 15px auto 0;
   padding: 15px;
@@ -71,16 +55,15 @@ class Card extends React.Component {
   render() {
     // var showIcon = this.props.revealed || this.props.matched;
     var cardIcon = this.props.icon;
+    var size = this.props.size;
     return (
-      <CardContainer
-                       matched={this.props.matched}
-                       >
+      <CardContainer matched={this.props.matched}
+                     size={size}>
         <ReactCardFlip isFlipped={this.props.revealed}
-                       infinite={true}
-                       >
-          <CardHidden key="front" onClick={this.onClick}></CardHidden>
-          <CardRevealed key="back" onClick={this.onClick}>
-            <CardRevealedContents>{cardIcon}</CardRevealedContents>
+                       infinite={true}>
+          <CardHidden key="front" size={size} onClick={this.onClick}></CardHidden>
+          <CardRevealed key="back" size={size} onClick={this.onClick}>
+            <CardRevealedContents size={size}>{cardIcon}</CardRevealedContents>
           </CardRevealed>
         </ReactCardFlip>
       </CardContainer>
