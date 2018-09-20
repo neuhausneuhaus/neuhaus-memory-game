@@ -39,7 +39,7 @@ const CountLabel = styled.div `
   width: 92px;
   /*margin: 0 auto;*/
   font-size: 20px;
-  letter-spacing: ${props => props.lbl =="turns" ? "10px" : "3px"};
+  letter-spacing: ${props => props.lbl ==="turns" ? "10px" : "3px"};
 `
 const CountScreenContainer = styled.div `
   position: relative;
@@ -126,8 +126,7 @@ class Game extends Component {
   }
   statusArea() {
     // TODO: extract to a component file, with styled-components
-    var matchCount = this.props.gameCompleted ?
-      "🏆" : this.props.matchesMade
+    var matchCount = this.props.matchesMade
     var restartBtnText = this.props.gameCompleted ?
       "Play Again?" :
       "Restart"

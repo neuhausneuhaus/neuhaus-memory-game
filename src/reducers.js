@@ -13,7 +13,8 @@ const initialGameState = {
   matchesMade : 0,
   gameCompleted: false,
   difficulty: "easy",
-  cards: []
+  cards: [],
+  secondsElapsed: 0
 };
 
 function cardReduc(state=[], action) {
@@ -60,7 +61,8 @@ function gameReduc(state = initialGameState, action){
         turnsTaken : 0,
         matchesMade : 0,
         gameCompleted: false,
-        cards: generateNewCards(state.cardData, state.difficulty) 
+        cards: generateNewCards(state.cardData, state.difficulty),
+        secondsElapsed: 0
       } );
     
     case CHANGE_DIFFICULTY:
@@ -75,7 +77,8 @@ function gameReduc(state = initialGameState, action){
         matchesMade : 0,
         gameCompleted: false,
         difficulty: newLevel,
-        cards: generateNewCards(state.cardData, newLevel)
+        cards: generateNewCards(state.cardData, newLevel),
+        secondsElapsed: 0
       });
 
     case CHECK_MATCHED_PAIR:
