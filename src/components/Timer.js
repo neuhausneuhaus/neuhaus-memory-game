@@ -1,8 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux';
-
-
-import styles from './Timer.scss'
+import styled from 'styled-components';
 
 export const formatTime = time => {
   if (time < 0) return '--:--'
@@ -12,12 +10,65 @@ export const formatTime = time => {
   const s = time % 60
   const ss = s < 10 ? `0${s}` : s
   if (h > 0) return [h, mm, ss].join(':')
-  return `${m}:${ss}`
+  return `${mm}:${ss}`
 }
 
-const TimerDiv = ({ time = 0 }) => <div className={styles.timer}>{formatTime(time)}</div>
+const TimerScreenContainer = styled.div `
+  position: absolute;
+  width: 216px;
+  height: 60px;
+  border: 1px solid grey;  
+  display: inline-flex;
+  left: calc(50% - 108px);
+  padding-left: 3px;
+`
+const TimerLabel = styled.div `
+  color: rgb(192, 181, 164);
+  width: 100%;
+  /*margin: 0 auto;*/
+  font-size: 20px;
+  letter-spacing: 3px;
+`
+const TimerScreen = styled.div `
+  font-family: pixelLCD;
+  font-size: 60px;
+  color: red;
+  height: 24px;
+  line-height: 83px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding-right: 4px;
+  text-align: right;
+  z-index: 0;
+`
+const Digitizer = styled.div ` 
+  font-family: pixelLCD;
+  width: 100%;
+  height: 100%;
+  font-size: 60px;
+  line-height: 83px;
+  color: rgba(162, 155, 155, 0.30);;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding-right: 4px;
+  text-align: right;
+  z-index: 0;
+`
 
-class Timer extends React.Component {
+
+const TimerDiv = ({ time = 0 }) => (
+  <div>
+    <TimerLabel>Game Time</TimerLabel>
+    <TimerScreenContainer>
+      <TimerScreen>{formatTime(time)}</TimerScreen>
+      <Digitizer>88:88</Digitizer>
+    </TimerScreenContainer>
+  </div>
+)
+
+class TimerView extends React.Component {
    constructor(props) {
      super(props)
      this.state = {
@@ -63,28 +114,6 @@ const mapStateToProps = state => ({
   secondsElapsed: state.secondsElapsed
 })
 
+const Timer = connect( mapStateToProps )(TimerView)
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    // onCardClicked: id => {
-    //   dispatch(revealCard(id));
-    // },
-    // onCheckForMatchedPair: () => {
-    //   dispatch(checkMatchedPair());
-    // },
-    // onInitGame: () => {
-    //   dispatch(initGame());
-    // },
-    // onChangeDifficulty: level => {
-    //   dispatch(changeDifficulty(level));
-    // }
-  };
-};
-
-
-const TimerView = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Timer)
-
-export default TimerView
+export default Timer 

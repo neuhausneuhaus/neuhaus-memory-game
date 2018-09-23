@@ -1,6 +1,5 @@
-
 import React, { Component } from 'react';
-import styled, { injectGlobal, keyframes } from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 
 // injectGlobal`
 //   @font-face {

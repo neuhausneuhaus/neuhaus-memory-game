@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { initGame, changeDifficulty } from '../actions';
-import TimerView from './Timer';
+import Timer from './Timer';
 
 
 const StatusBoardContainer = styled.div `
@@ -35,14 +35,11 @@ const CountScreenContainer = styled.div `
   position: relative;
   width: 92px;
   height: 60px;
-  /*margin: 0 auto;*/
   border: 1px solid grey;
 `
 const CountScreen = styled.div `
-  /*display: flex;*/
   font-family: ${props => props.won ? "pixelLCD" : "pixelLCD"};
   font-size: 60px;
-  text-align: left;
   color: white;
   width: 100%;
   height: 100%;
@@ -59,7 +56,6 @@ const Digitizer = styled.div `
   width: 100%;
   height: 100%;
   font-size: 60px;
-  text-align: left;
   line-height: 83px;
   color: rgba(162, 155, 155, 0.30);;
   position: absolute;
@@ -68,18 +64,6 @@ const Digitizer = styled.div `
   padding-right: 4px;
   text-align: right;
   z-index: 0;
-/*background:
-        radial-gradient(
-            rgba(0,255,0,.8),
-            black
-        ),
-        repeating-linear-gradient(
-            transparent 0,
-            rgba(0,0,0,.2) 3px,
-            transparent 6px
-        );
-    background-blend-mode: overlay;
-    background-size: cover;*/
 `
 const RestartBtn = styled.div `
   color: rgb(192, 181, 164);
@@ -101,7 +85,7 @@ class StatusBoardView extends Component {
 
     return (
       <StatusBoardContainer>
-        <TimerView/>
+        <Timer/>
         <MatchCount>
           <CountLabel lbl="matches">Matches</CountLabel>
           <CountScreenContainer>
