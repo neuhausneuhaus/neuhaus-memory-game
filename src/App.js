@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import GameView from './components/Game';
-import TimerView from './components/Timer';
 
 import styled, { injectGlobal } from 'styled-components'
 
@@ -32,7 +31,6 @@ class App extends Component {
   render() {
     return (
       <AppWrapper>
-        <TimerView/>
         <GameView/>
       </AppWrapper>
     );

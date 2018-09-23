@@ -21,7 +21,7 @@ class Loader extends Component {
 
   render() {
     return (
-      <LoadDiv> LOADING... </LoadDiv>
+      <LoadDiv> LOADING CARDS... </LoadDiv>
     );
   }
 }
