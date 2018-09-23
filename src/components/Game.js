@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import Card from './Card';
 import Loader from './Loader';
 import { revealCard, checkMatchedPair} from '../actions';
-import StatusBoard from './StatusBoard'
+import StatusBoard from './StatusBoard/StatusBoard'
 import styled from 'styled-components';
 
 const GameBoard = styled.div `

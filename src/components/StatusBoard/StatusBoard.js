@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { initGame, changeDifficulty } from '../actions';
+import { initGame, changeDifficulty } from '../../actions';
 import Timer from './Timer';
 
 
