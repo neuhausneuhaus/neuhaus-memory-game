@@ -3,3 +3,4 @@
 - redux choice
 - tried to balance between convenience, and not overusing plugins
 - superagent for json retrieval
+- styled component, whereas I usually use BEM

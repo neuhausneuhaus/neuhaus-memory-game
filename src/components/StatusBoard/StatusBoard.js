@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { initGame, changeDifficulty } from '../../actions';
+import { initGame } from '../../actions';
 import Timer from './Timer';
+import DifficultySelect from './DifficultySelect';
 
 
 const StatusBoardContainer = styled.div `
@@ -68,9 +69,7 @@ const Digitizer = styled.div `
 const RestartBtn = styled.div `
   color: rgb(192, 181, 164);
 `
-const DifficultyBtn = styled.div `
-  color: rgb(192, 181, 164);
-`
+
 
 class StatusBoardView extends Component {
   render() {
@@ -79,9 +78,6 @@ class StatusBoardView extends Component {
     var restartBtnText = this.props.gameCompleted ?
       "Play Again?" :
       "Restart"
-    var diffucltyBtnText = this.props.difficulty === "easy" ?
-      "Switch to Hard" :
-      "Switch to Easy"
 
     return (
       <StatusBoardContainer>
@@ -111,9 +107,7 @@ class StatusBoardView extends Component {
         <RestartBtn onClick={this.props.onInitGame}>
           {restartBtnText}
         </RestartBtn>
-        <DifficultyBtn onClick={this.props.onChangeDifficulty}>
-          {diffucltyBtnText}
-        </DifficultyBtn>
+        <DifficultySelect/>
       </StatusBoardContainer>
     );
   }
@@ -122,8 +116,7 @@ class StatusBoardView extends Component {
 const mapStateToProps = state => ({
   turnsTaken: state.turnsTaken,
   gameCompleted: state.gameCompleted,
-  matchesMade: state.matchesMade,
-  difficulty: state.difficulty
+  matchesMade: state.matchesMade
 })
 
 const mapDispatchToProps = (dispatch) => {
@@ -131,9 +124,6 @@ const mapDispatchToProps = (dispatch) => {
     onInitGame: () => {
       dispatch(initGame());
     },
-    onChangeDifficulty: level => {
-      dispatch(changeDifficulty(level));
-    }
   };
 };
 
