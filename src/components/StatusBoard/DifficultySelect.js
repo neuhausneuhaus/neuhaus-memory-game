@@ -1,17 +1,29 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { initGame, changeDifficulty } from '../../actions';
+import { changeDifficulty } from '../../actions';
 import toggleBallImg from '../../assets/images/metal-sphere-1.png';
 import toggleBkgdImg from '../../assets/images/metal-bkgd-1.jpg';
+
+const DifficultyArea = styled.div`
+  width: 50%;
+  display: inline-block;
+  padding-left: 20px;
+  box-sizing: border-box;
+`
+const DifficultyAreaLabel = styled.div`
+  color: rgb(192,181,164);
+  font-size: 16px;
+  letter-spacing: 3px;
+  padding-top: 10px;
+`
 
 const SelectedLabelArea = styled.div`
   display: flex;
   justify-content: space-between;
   font-size: 30px;
-  height: 0;
+  height: 10px;
   margin-top: 15px;
-  width: 48%;
 `;
 
 const SelectedLabel = styled.div`
@@ -40,7 +52,7 @@ const ToggleArea = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-  width: 48%;
+  bottom: 10px;
 `;
 
 const Toggle = styled.div`
@@ -50,19 +62,14 @@ const Toggle = styled.div`
   overflow: hidden;
   position: relative;
   transform: translate3d(0, 0, 0);
-  /*background-color: rgb(89, 173, 122);*/
   background-image: url(${toggleBkgdImg});
   background-size: 110px;
   background-position: center;
   height: 28px;
   width: 80px;
-  /*border-radius: 50px;*/
   border-radius: 12px;
   padding: 1px;
-/*  border: 2px groove ${props => props.toggled ?
-    "red" :
-    "green"
-  };*/
+
   border: 2px groove grey;
   &:hover {
     cursor: pointer;
@@ -78,9 +85,6 @@ const ToggleBall = styled.div`
   transition: transform 0.3s cubic-bezier(1,.19,.15,.7);
   transition-delay: 0.1s;
   will-change: transform;
-  /*border: 1px solid rgb(192,181,164);*/
-  /*border-radius: 50px;*/
-  /*background-color: rgb(35, 33, 35);*/
   border-radius: 12px;
   background-image: url(${toggleBallImg});
   background-repeat: no-repeat;
@@ -96,43 +100,6 @@ const ToggleBall = styled.div`
     cursor: pointer;
   }
 `;
-// 
-// const RippleBg = styled.div`
-//   width: 100%;
-//   height: 100%;
-//   top: 0;
-//   left: 0;
-//   background-image: radial-gradient(
-//     circle, rgba(165, 73, 86, 1) 9%, transparent 10%
-//   );
-//   background-repeat: no-repeat;
-//   background-position: 50%;
-//   pointer-events: none;
-//   transition: transform 0.5s, opacity 0.3s ease;
-//   transform: ${props => props.visible ? 'scale(10, 10)' : 'scale(0, 0)'};
-//   opacity: ${props => props.visible ? 1 : 0};
-//   position: absolute;
-//   z-index: 1;
-// `;
-// 
-// const InnerLabel = styled.span`
-//   font-size: 14px;
-//   color: rgb(9, 15, 14);
-//   position: absolute;
-//   z-index: 1;
-//   ${props => props.left && 'left: 10px;'};
-//   ${props => props.right && 'right: 10px;'};
-// `;
-// 
-// const OuterLabel = styled.span`
-//   font-size: 14px;
-//   color: rgb(192,181,164);
-//   position: absolute;
-//   top: 0px;
-//   transform: translateY(-110%);
-//   width: 100%;
-//   text-align: center;
-// `;
 
 
 class SelectionArea extends Component {
@@ -167,10 +134,11 @@ class SelectionArea extends Component {
 
   render() {
     return (
-      <div>  
+      <DifficultyArea>  
         {this.selectedLabels()}
         {this.toggleSwitch()}
-      </div>
+        <DifficultyAreaLabel>Game Difficulty</DifficultyAreaLabel>
+      </DifficultyArea>
     );
   }
 }
@@ -186,9 +154,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onInitGame: () => {
-      dispatch(initGame());
-    },
     onChangeDifficulty: level => {
       dispatch(changeDifficulty(level));
     }

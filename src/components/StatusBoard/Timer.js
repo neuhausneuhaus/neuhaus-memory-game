@@ -41,6 +41,7 @@ const TimerScreen = styled.div `
   padding-right: 4px;
   text-align: right;
   z-index: 0;
+  text-shadow: 0 0 12px;
 `
 const Digitizer = styled.div ` 
   font-family: pixelLCD;

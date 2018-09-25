@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { initGame } from '../../actions';
+import RestartButton from './RestartButton'
 import Timer from './Timer';
 import DifficultySelect from './DifficultySelect';
 
@@ -14,8 +14,6 @@ const StatusBoardContainer = styled.div `
   display: block;
   padding: 10px;
   border: 15px groove gray;
-  /*display: flex;
-  flex-flow: column wrap;*/
 `
 const MatchCount = styled.div `
   width: 50%;
@@ -28,7 +26,6 @@ const TurnCount = styled.div `
 const CountLabel = styled.div `
   color: rgb(192, 181, 164);
   width: 92px;
-  /*margin: 0 auto;*/
   font-size: 20px;
   letter-spacing: ${props => props.lbl ==="turns" ? "10px" : "3px"};
 `
@@ -39,9 +36,9 @@ const CountScreenContainer = styled.div `
   border: 1px solid grey;
 `
 const CountScreen = styled.div `
-  font-family: ${props => props.won ? "pixelLCD" : "pixelLCD"};
+  font-family: pixelLCD;
   font-size: 60px;
-  color: white;
+  color: #fdffd7;
   width: 100%;
   height: 100%;
   line-height: 83px;
@@ -51,6 +48,7 @@ const CountScreen = styled.div `
   padding-right: 4px;
   text-align: right;
   z-index: 1;
+  text-shadow: 0 0 12px;
 `
 const Digitizer = styled.div ` 
   font-family: pixelLCD;
@@ -66,18 +64,18 @@ const Digitizer = styled.div `
   text-align: right;
   z-index: 0;
 `
-const RestartBtn = styled.div `
-  color: rgb(192, 181, 164);
-`
 
+const BoardDivider = styled.div `
+  width: 84%;
+  height: 2px;
+  background-color: rgb(192,181,164);
+  margin: 20px auto;
+  box-shadow: inset 2px 1px #808080;
+`
 
 class StatusBoardView extends Component {
   render() {
-    // TODO: extract to a component file, with styled-components
     var matchCount = this.props.matchesMade
-    var restartBtnText = this.props.gameCompleted ?
-      "Play Again?" :
-      "Restart"
 
     return (
       <StatusBoardContainer>
@@ -104,10 +102,9 @@ class StatusBoardView extends Component {
             </Digitizer>
           </CountScreenContainer>
         </TurnCount>
-        <RestartBtn onClick={this.props.onInitGame}>
-          {restartBtnText}
-        </RestartBtn>
+        <BoardDivider/>
         <DifficultySelect/>
+        <RestartButton/>
       </StatusBoardContainer>
     );
   }
@@ -118,18 +115,17 @@ const mapStateToProps = state => ({
   gameCompleted: state.gameCompleted,
   matchesMade: state.matchesMade
 })
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onInitGame: () => {
-      dispatch(initGame());
-    },
-  };
-};
+// 
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     onInitGame: () => {
+//       dispatch(initGame());
+//     },
+//   };
+// };
 
 const StatusBoard = connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
 )(StatusBoardView)
 
 export default StatusBoard;
