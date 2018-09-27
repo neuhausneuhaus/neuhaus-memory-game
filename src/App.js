@@ -22,6 +22,7 @@ injectGlobal`
     src: url("/fonts/unifont_upper-11.0.02.ttf");
   }
 `
+
 const AppWrapper = styled.div `
   text-align: center;
   margin: 0;
